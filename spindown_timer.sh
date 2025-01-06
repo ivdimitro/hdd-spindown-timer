@@ -338,8 +338,12 @@ function detect_drives_zpool() {
         while read -r driveid; do
             # Remove invalid rows (Cannot be statically cut because of different pool geometries)
             case $DRIVEID_TYPE in
-                "gptid")    driveid=$(echo "$driveid" | grep -E "^gptid/.*$" | sed "s/^\(.*\)\.eli$/\1/") ;;
-                "partuuid") driveid=$(echo "$driveid" | grep -E "^(\w+\-){2,}") ;;
+                "gptid")    
+                    # log_verbose "Received driveids: $driveid"
+                    driveid=$(echo "$driveid" | grep -E "^gptid/.*$" | sed "s/^\(.*\)\.eli$/\1/") ;;
+                "partuuid")
+                    # log_verbose "Received driveids: $driveid"
+                    driveid=$(echo "$driveid" | grep -E "^(\w+\-){2,}") ;;
             esac
 
             # Skip if current row is invalid after filtering above

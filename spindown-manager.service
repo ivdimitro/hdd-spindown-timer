@@ -1,0 +1,10 @@
+[Unit]
+Description=Spinning down HDDs
+
+[Service]
+User=root
+Group=root
+ExecStart=/root/hdd-spindown-timer/spindown_timer.sh -l -c -i sdb -p 30 -t 60
+
+[Install]
+WantedBy=multi-user.target
